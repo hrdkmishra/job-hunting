@@ -2,9 +2,8 @@ from bs4 import BeautifulSoup
 import requests
 import time
 
-print('skills you are unfamilar with:')
-# unfamiliar_skills = input('--->')
-unfamiliar_skills = list(map(str,input('->').strip().split()))
+print('skills you are unfamilar with(in CAPS):')
+unfamiliar_skills = input('-->')
 print(f'filtering out {unfamiliar_skills} skills...')
 
 def find_job():
@@ -17,7 +16,7 @@ def find_job():
             company_name = job.find('h3', class_='joblist-comp-name').text.replace(' ','')
             skills = job.find('span', class_='srp-skills').text.replace(' ','')      
             more_info = job.header.h2.a['href']
-            if unfamiliar_skills not in skills:
+            if unfamiliar_skills not in skills.upper():
                 print(f"Company name: {company_name.strip()}")
                 print(f"Required skills: {skills.strip()}")
                 print(f"More Info: {more_info}")
